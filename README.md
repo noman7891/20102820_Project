@@ -147,7 +147,7 @@ MONGODB_URI=mongodb://34.51.232.146:27017/inventory_store
 Clone the repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/noman7891/20102820_Project.git
 ```
 
 Install dependencies
