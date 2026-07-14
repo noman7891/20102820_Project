@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ElectroStore | Inventory Management System</title>
+  <meta name="description" content="A professional inventory management dashboard for ElectroStore, a small electronics retailer. Track, filter, search, and manage products dynamically.">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Loading Overlay -->
+  <div id="loading-overlay" class="loading-overlay hidden">
+    <div class="spinner-container">
+      <div class="glow-spinner"></div>
+      <p class="loading-text">Syncing inventory...</p>
+    </div>
+  </div>
+
+  <!-- Toast Notifications Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Main Container -->
+  <div class="app-container">
+    <!-- Header / Navigation -->
+    <header class="main-header">
+      <div class="logo-area">
+        <div class="logo-icon">⚡</div>
+        <div class="logo-text">
+          <h1>ElectroStore</h1>
+          <span>Inventory Hub</span>
+        </div>
+      </div>
+      
+      <!-- Stats Dashboard -->
+      <div class="stats-dashboard">
+        <div class="stat-card" id="stat-total-products">
+          <div class="stat-label">Total Products</div>
+          <div class="stat-value" id="val-total-products">0</div>
+        </div>
+        <div class="stat-card" id="stat-total-stock">
+          <div class="stat-label">Total Stock Items</div>
+          <div class="stat-value" id="val-total-stock">0</div>
+        </div>
+        <div class="stat-card" id="stat-low-stock">
+          <div class="stat-label">Low Stock Alerts</div>
+          <div class="stat-value text-warning" id="val-low-stock">0</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Layout -->
+    <main class="main-content">
+      <!-- Left Column: Form Panel -->
+      <section class="form-panel">
+        <div class="glass-card" id="product-form-card">
+          <h2 id="form-title">Add New Product</h2>
+          <p class="form-subtitle" id="form-subtitle">Enter details to catalog a new device</p>
+          
+          <form id="product-form" novalidate>
+            <!-- Hidden input for ID (Edit Mode) -->
+            <input type="hidden" id="product-id">
+
+            <div class="form-group">
+              <label for="product-name">Product Name *</label>
+              <input type="text" id="product-name" placeholder="e.g. iPad Pro 12.9&quot;" required>
+              <div class="error-feedback" id="err-product-name"></div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="product-category">Category *</label>
+                <select id="product-category" required>
+                  <option value="" disabled selected>Select Category</option>
+                  <option value="Smartphones">Smartphones</option>
+                  <option value="Laptops">Laptops</option>
+                  <option value="Tablets">Tablets</option>
+                  <option value="Audio">Audio</option>
+                  <option value="Wearables">Wearables</option>
+                  <option value="Accessories">Accessories</option>
+                </select>
+                <div class="error-feedback" id="err-product-category"></div>
+              </div>
+
+              <div class="form-group">
+                <label for="product-brand">Brand *</label>
+                <input type="text" id="product-brand" placeholder="e.g. Apple" required>
+                <div class="error-feedback" id="err-product-brand"></div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="product-price">Price ($) *</label>
+                <input type="number" id="product-price" placeholder="0.00" min="0" step="0.01" required>
+                <div class="error-feedback" id="err-product-price"></div>
+              </div>
+
+              <div class="form-group">
+                <label for="product-quantity">Quantity *</label>
+                <input type="number" id="product-quantity" placeholder="0" min="0" step="1" required>
+                <div class="error-feedback" id="err-product-quantity"></div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="product-description">Description</label>
+              <textarea id="product-description" rows="3" placeholder="Describe key features, specs..."></textarea>
+              <div class="error-feedback" id="err-product-description"></div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" id="btn-submit" class="btn btn-primary">Save Product</button>
+              <button type="button" id="btn-cancel" class="btn btn-secondary hidden">Cancel Edit</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- Right Column: Table / Listing Panel -->
+      <section class="listing-panel">
+        <div class="glass-card">
+          <!-- Controls (Search, Filter, Sort) -->
+          <div class="table-controls">
+            <div class="search-box">
+              <span class="search-icon">🔍</span>
+              <input type="text" id="search-input" placeholder="Search products by name...">
+            </div>
+            
+            <div class="filter-sort-group">
+              <div class="control-select">
+                <label for="filter-category" class="sr-only">Filter Category</label>
+                <select id="filter-category">
+                  <option value="all">All Categories</option>
+                  <option value="Smartphones">Smartphones</option>
+                  <option value="Laptops">Laptops</option>
+                  <option value="Tablets">Tablets</option>
+                  <option value="Audio">Audio</option>
+                  <option value="Wearables">Wearables</option>
+                  <option value="Accessories">Accessories</option>
+                </select>
+              </div>
+
+              <div class="control-select">
+                <label for="sort-price" class="sr-only">Sort by Price</label>
+                <select id="sort-price">
+                  <option value="newest">Sort: Newest</option>
+                  <option value="price_asc">Price: Low to High</option>
+                  <option value="price_desc">Price: High to Low</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product Table -->
+          <div class="table-wrapper">
+            <table id="products-table">
+              <thead>
+                <tr>
+                  <th>Product Name</th>
+                  <th>Category</th>
+                  <th>Brand</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th>Added Date</th>
+                  <th class="text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="products-tbody">
+                <!-- Rendered dynamically -->
+                <tr>
+                  <td colspan="7" class="empty-state">Loading products...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div id="delete-modal" class="modal-overlay hidden">
+    <div class="modal-content glass-card">
+      <div class="modal-header">
+        <h3>Confirm Product Deletion</h3>
+        <button id="modal-close" class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete <strong id="delete-product-name">Product</strong>?</p>
+        <p class="warning-text">⚠️ This action is permanent and cannot be undone.</p>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-confirm-delete" class="btn btn-danger">Yes, Delete</button>
+        <button id="btn-cancel-delete" class="btn btn-secondary">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Client-side script -->
+  <script src="app.js"></script>
+</body>
+</html>

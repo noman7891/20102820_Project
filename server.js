@@ -1,0 +1,13 @@
+const app = require('./app');
+const connectDB = require('./config/db');
+
+const PORT = process.env.PORT || 5001;
+
+// Connect to Database and start server
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}).catch((err) => {
+  console.error('Failed to start server due to connection error', err);
+});
