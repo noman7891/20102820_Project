@@ -137,7 +137,7 @@ Create a `.env` file in the project root.
 ```env
 PORT=5001
 
-MONGODB_URI=mongodb://127.0.0.1:27017/inventory_store
+MONGODB_URI=mongodb://34.51.232.146:27017/inventory_store
 ```
 
 ---
@@ -168,10 +168,10 @@ Run production
 npm start
 ```
 
-Application URL
+Application URL LIVE
 
 ```
-http://localhost:5001
+http://34.51.232.146
 ```
 
 ---
