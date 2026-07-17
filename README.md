@@ -1,22 +1,17 @@
-# ⚡ ElectroStore - Inventory Management System
+# ElectroStore - Inventory Management System
 
 A full-stack **Inventory Management Information System** developed for a small electronics store. The application follows a modern API-based architecture where the frontend communicates with the backend using RESTful API calls without page refreshes.
 
 The system allows store staff to manage products, monitor inventory levels, search inventory, and perform complete CRUD (Create, Read, Update, Delete) operations through a responsive web interface.
 
----
-
-## 📸 Application Preview
+# Application Preview
 
 > Dashboard Screenshot
 
 ![ElectroStore Dashboard](./public/dashboard.png)
 
-*(Replace `dashboard.png` with your screenshot or update the image path.)*
 
----
-
-# 🚀 Features
+#  Features
 
 - Dashboard displaying:
   - Total Products
@@ -40,11 +35,8 @@ The system allows store staff to manage products, monitor inventory levels, sear
 - In-Memory Database Fallback
 - Automated Testing using Jest & Supertest
 
----
+#  System Architecture
 
-# 🏗️ System Architecture
-
-```
 Browser
       │
       ▼
@@ -60,37 +52,34 @@ MongoDB (Mongoose)
       │
       ▼
 Fallback In-Memory Repository
-```
 
----
+#  Technology Stack
 
-# 💻 Technology Stack
-
-## Frontend
+# Frontend
 
 - HTML5
 - CSS3
 - Vanilla JavaScript
 - Fetch API
 
-## Backend
+# Backend
 
 - Node.js
 - Express.js
 
-## Database
+# Database
 
 - MongoDB
 - Mongoose ODM
 
-## Testing
+# Testing
 
 - Jest
 - Supertest
 
 ---
 
-# 📂 Project Structure
+# Project Structure
 
 ```
 inventory-store/
@@ -130,53 +119,49 @@ inventory-store/
 
 ---
 
-# ⚙️ Environment Variables
+# Environment Variables
 
 Create a `.env` file in the project root.
 
 ```env
 PORT=5001
 
-MONGODB_URI=mongodb://34.51.232.146:27017/inventory_store
-```
+MONGODB_URI=mongodb://34.105.224.222:27017/inventory_store
 
----
 
-# 📦 Installation
+# Installation
 
 Clone the repository
 
 ```bash
 git clone https://github.com/noman7891/20102820_Project.git
-```
+
 
 Install dependencies
 
 ```bash
 npm install
-```
+
 
 Start development server
 
 ```bash
 npm run dev
-```
+
 
 Run production
 
 ```bash
 npm start
-```
+
 
 Application URL LIVE
 
 ```
-http://34.51.232.146
+http://34.105.224.222
 ```
 
----
-
-# 🌐 REST API Endpoints
+# REST API Endpoints
 
 | Method | Endpoint | Description |
 |----------|-------------------|----------------------|
@@ -190,25 +175,24 @@ http://34.51.232.146
 
 # ✔ CRUD Operations
 
-### Create
+# Create
 
 Add new inventory products.
 
-### Read
+# Read
 
 Display all available products.
 
-### Update
+# Update
 
 Modify product details.
 
-### Delete
+# Delete
 
 Remove products from inventory.
 
----
 
-# 🔍 Search, Filter & Sorting
+# Search, Filter & Sorting
 
 The system supports:
 
@@ -218,26 +202,22 @@ The system supports:
 - Sort by Price
 - Automatic Dashboard Statistics
 
----
+# Validation
 
-# ✅ Validation
-
-### Client Side
+# Client Side
 
 - Required Fields
 - Positive Price
 - Positive Quantity
 - Input Format Validation
 
-### Server Side
+# Server Side
 
 - Schema Validation
 - Invalid Request Handling
 - JSON Error Responses
 
----
-
-# 🧪 Testing
+# Testing
 
 The project includes automated tests using:
 
@@ -256,10 +236,8 @@ Tests include:
 - Validation
 - API Endpoints
 - Error Handling
-
----
-
-# 🔮 Future Improvements
+- 
+# Future Improvements
 
 - User Authentication
 - JWT Authorization
@@ -272,21 +250,18 @@ Tests include:
 - Customer Management
 - Dashboard Charts
 
----
+#  Author
 
-# 👨‍💻 Author
-
-**Muhammad Noman**
+**Noman Pervaiz**
 
 Programming for Information Systems
 
 Dublin Business School
 
----
 
-# 🤖 AI Assistance
+# AI Assistance
 
-This project was developed with AI assistance as permitted under the module assessment guidelines.
+This project was developed with the help of AI assistance as permitted under the module assessment guidelines.
 
 AI tools were used for:
 
@@ -295,10 +270,8 @@ AI tools were used for:
 - Debugging support
 - Documentation improvements
 
-All generated content was reviewed, modified, tested, and integrated by the student.
+All generated content was reviewed, modified, tested, and integrated by the author.
 
----
+# References
+https://chatgpt.com/share/6a59b745-3594-83eb-b15e-9df8c7038f11
 
-# 📄 License
-
-This project is developed for educational purposes as part of the **Programming for Information Systems** module at **Dublin Business School**.
